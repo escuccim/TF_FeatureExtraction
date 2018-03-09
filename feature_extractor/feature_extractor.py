@@ -97,7 +97,8 @@ class FeatureExtractor(object):
             self._checkpoint_path, variables_to_restore)
 
         # Start the session and load the pre-trained weights
-        self._sess = tf.Session()
+        config = tf.ConfigProto(device_count = {'GPU': 0})
+        self._sess = tf.Session(config=config)
         restore_fn(self._sess)
 
         # Local variables initializer, needed for queues etc.
